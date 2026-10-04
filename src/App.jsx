@@ -71,7 +71,7 @@ export default function App() {
     <div className="shell">
       <header className="top">
         <a className="brand" href={nav[0][0]}>
-          djassa <em>{agent ? 'agent' : 'admin'}</em>
+          djassa <em>installateur</em>
         </a>
         <nav>
           {nav.map(([href, label]) => (
