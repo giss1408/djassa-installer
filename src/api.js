@@ -11,7 +11,7 @@
 
 export const API_BASE = (import.meta.env.VITE_DJASSA_API_BASE || 'http://localhost:8000').replace(/\/+$/, '')
 
-const REFRESH_KEY = 'djassa-admin-refresh'
+const REFRESH_KEY = 'djassa-installer-refresh'
 let accessToken = null
 let role = null
 let renewing = null

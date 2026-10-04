@@ -4,7 +4,7 @@ import App from '../src/App.jsx'
 import { fakeApi, pair } from './server.js'
 
 function sessionAs(role, routes = {}) {
-  sessionStorage.setItem('djassa-admin-refresh', 'refresh')
+  sessionStorage.setItem('djassa-installer-refresh', 'refresh')
   return fakeApi({ 'POST /api/auth/refresh': () => [200, pair(role)], ...routes })
 }
 
