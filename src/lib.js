@@ -39,6 +39,7 @@ export function useAction() {
 
 export const CATEGORIES = {
   maquis: 'Maquis',
+  restaurant: 'Restaurant',
   superette: 'Supérette',
   pharmacy: 'Pharmacie',
   mode: 'Mode',
