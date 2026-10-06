@@ -139,7 +139,7 @@ function NewShop({ onCreated }) {
     <form className="card" onSubmit={submit}>
       <h2>Nouveau commerce</h2>
       <ShopFields value={shop} onChange={setShop} />
-      <Field label="Numéro du commerçant (connexion Djassa Pro)" hint="Un numéro ne gère qu’un commerce. Souvent le même que le portefeuille.">
+      <Field label="Numéro du commerçant (connexion Hossouko Pro)" hint="Un numéro ne gère qu’un commerce. Souvent le même que le portefeuille.">
         <input value={shop.merchant_phone || ''} onChange={(e) => setShop({ ...shop, merchant_phone: e.target.value })} inputMode="tel" />
       </Field>
       <button disabled={action.busy}>Créer le commerce</button>

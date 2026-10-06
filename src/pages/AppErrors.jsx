@@ -3,7 +3,7 @@ import { api } from '../api.js'
 import { formatDate, useLoad } from '../lib.js'
 import { Loading } from '../ui.jsx'
 
-const APPS = { '': 'Toutes', user: 'App client', retailer: 'Djassa Pro', web: 'Site web' }
+const APPS = { '': 'Toutes', user: 'App client', retailer: 'Hossouko Pro', web: 'Site web' }
 
 export default function AppErrors() {
   const [app, setApp] = useState('')

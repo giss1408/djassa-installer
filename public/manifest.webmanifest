@@ -1,7 +1,7 @@
 {
-  "name": "Djassa Installateur",
+  "name": "Hossouko Installateur",
   "short_name": "Installateur",
-  "description": "Inscrire et gérer les commerces Djassa.",
+  "description": "Inscrire et gérer les commerces Hossouko.",
   "lang": "fr-CI",
   "start_url": "/",
   "scope": "/",

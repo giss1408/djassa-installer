@@ -4,7 +4,7 @@ import App from '../src/App.jsx'
 import { fakeApi, pair } from './server.js'
 
 function sessionAs(role, routes = {}) {
-  sessionStorage.setItem('djassa-installer-refresh', 'refresh')
+  sessionStorage.setItem('hossouko-installer-refresh', 'refresh')
   return fakeApi({ 'POST /api/auth/refresh': () => [200, pair(role)], ...routes })
 }
 

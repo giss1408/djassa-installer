@@ -27,9 +27,9 @@ export default function SignIn() {
   return (
     <div className="signin">
       <h1>
-        djassa <em>installateur</em>
+        hossouko <em>installateur</em>
       </h1>
-      <p className="muted">Réservé à l’équipe Djassa. Connexion par numéro de téléphone et code SMS.</p>
+      <p className="muted">Réservé à l’équipe Hossouko. Connexion par numéro de téléphone et code SMS.</p>
       {!sentTo ? (
         <form onSubmit={send}>
           <Field label="Numéro de téléphone">

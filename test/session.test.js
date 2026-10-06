@@ -11,7 +11,7 @@ describe('session role', () => {
     await verifyCode('0700000004', '000000')
     expect(calls[0].body).toEqual({ phone: '0700000004', code: '000000', app: 'admin' })
     expect(sessionRole()).toBe('agent')
-    expect(sessionStorage.getItem('djassa-installer-refresh')).toBe('refresh-agent')
+    expect(sessionStorage.getItem('hossouko-installer-refresh')).toBe('refresh-agent')
 
     await signOut()
     expect(sessionRole()).toBe(null)
@@ -19,14 +19,14 @@ describe('session role', () => {
   })
 
   it('is restored by a renewal after a reload', async () => {
-    sessionStorage.setItem('djassa-installer-refresh', 'refresh-old')
+    sessionStorage.setItem('hossouko-installer-refresh', 'refresh-old')
     fakeApi({ 'POST /api/auth/refresh': () => [200, pair('admin')] })
     expect(await renew()).toBe(true)
     expect(sessionRole()).toBe('admin')
   })
 
   it('is cleared when the renewal is refused', async () => {
-    sessionStorage.setItem('djassa-installer-refresh', 'refresh-revoked')
+    sessionStorage.setItem('hossouko-installer-refresh', 'refresh-revoked')
     fakeApi({ 'POST /api/auth/refresh': () => [401, { detail: 'Session expiree. Reconnectez-vous.' }] })
     expect(await renew()).toBe(false)
     expect(sessionRole()).toBe(null)

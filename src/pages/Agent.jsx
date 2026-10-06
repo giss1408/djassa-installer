@@ -6,7 +6,7 @@ import { ShopFields } from './Shops.jsx'
 
 // A field agent standing in the shop: the same form as an admin's "Nouveau
 // commerce", with the owner's number required. The shop goes live at once and
-// records which agent enrolled it (djassa-BE app/api/onboarding.py).
+// records which agent enrolled it (hossouko-BE app/api/onboarding.py).
 export function AgentEnrol() {
   const [shop, setShop] = useState({ category: 'maquis', points_per_100: 1 })
   const [created, setCreated] = useState(null)
@@ -28,11 +28,11 @@ export function AgentEnrol() {
         <div className="card">
           <h2>{created.name} est inscrit</h2>
           <p>
-            Le gérant ({created.merchant_phone_masked}) a reçu un SMS. Il peut se connecter à Djassa Pro avec son numéro, devant vous.
+            Le gérant ({created.merchant_phone_masked}) a reçu un SMS. Il peut se connecter à Hossouko Pro avec son numéro, devant vous.
           </p>
           <p className="muted">
             {created.pay_code
-              ? `QR de paiement ${WALLETS[created.payout_provider] || ''} créé (code ${created.pay_code}). Le gérant l’affiche depuis Djassa Pro.`
+              ? `QR de paiement ${WALLETS[created.payout_provider] || ''} créé (code ${created.pay_code}). Le gérant l’affiche depuis Hossouko Pro.`
               : 'Pas de portefeuille : pas de QR de paiement. Le commerce a la fidélité et apparaît dans l’app client.'}
           </p>
         </div>
@@ -40,7 +40,7 @@ export function AgentEnrol() {
       <form className="card" onSubmit={submit}>
         <p className="muted">Vous êtes dans le commerce : vérifiez le nom, l’adresse et le numéro du gérant avec lui.</p>
         <ShopFields value={shop} onChange={setShop} />
-        <Field label="Numéro du gérant (connexion Djassa Pro)" hint="Obligatoire. Un numéro ne gère qu’un commerce. Souvent le même que le portefeuille.">
+        <Field label="Numéro du gérant (connexion Hossouko Pro)" hint="Obligatoire. Un numéro ne gère qu’un commerce. Souvent le même que le portefeuille.">
           <input value={shop.merchant_phone || ''} onChange={(e) => setShop({ ...shop, merchant_phone: e.target.value })} inputMode="tel" required />
         </Field>
         <button disabled={action.busy}>Inscrire le commerce</button>

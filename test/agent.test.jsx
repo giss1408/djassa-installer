@@ -42,7 +42,7 @@ describe('field agent', () => {
     await signInAs('agent')
     fakeApi({
       'GET /api/agent/venues': () => [200, [
-        { id: 9, name: 'Superette Agent', category: 'superette', commune: 'Cocody', payout_provider: 'wave', merchant_phone_masked: '07 •• •• 77 77', pay_code: 'abc', qr_payload: 'djassa://pay/abc' },
+        { id: 9, name: 'Superette Agent', category: 'superette', commune: 'Cocody', payout_provider: 'wave', merchant_phone_masked: '07 •• •• 77 77', pay_code: 'abc', qr_payload: 'hossouko://pay/abc' },
       ]],
     })
     render(<AgentShops />)

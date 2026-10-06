@@ -12,7 +12,7 @@ export default function PartnerRequests() {
         <h1>Demandes d’inscription</h1>
         <Tabs value={status} onChange={setStatus} />
       </div>
-      <p className="muted">Trois vérifications avant d’approuver : l’approbation crée le commerce et donne à ce numéro l’accès à Djassa Pro.</p>
+      <p className="muted">Trois vérifications avant d’approuver : l’approbation crée le commerce et donne à ce numéro l’accès à Hossouko Pro.</p>
       <Loading state={requests}>
         {requests.data?.length === 0 && <p className="muted">Aucune demande.</p>}
         {requests.data?.map((r) => (
@@ -36,7 +36,7 @@ export function Tabs({ value, onChange }) {
 }
 
 // What the admin confirms before approving; the server refuses without them
-// (djassa-BE APPROVAL_CHECKS). The wallet check applies only to a request
+// (hossouko-BE APPROVAL_CHECKS). The wallet check applies only to a request
 // that names a wallet.
 const CHECKS = {
   called: 'J’ai appelé ce numéro et parlé au gérant',
