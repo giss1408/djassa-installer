@@ -8,6 +8,9 @@ services:
   - type: web
     runtime: static
     name: fidelia-installer
+    # The test installer follows `integration`: every push there deploys. The
+    # production one follows `trunk` (fidelia-BE render.production.yaml).
+    branch: integration
     buildCommand: npm ci && npm run lint && npm run build
     staticPublishPath: ./dist
     pullRequestPreviewsEnabled: false
