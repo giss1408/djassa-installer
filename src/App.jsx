@@ -71,7 +71,7 @@ export default function App() {
     <div className="shell">
       <header className="top">
         <a className="brand" href={nav[0][0]}>
-          hossouko <em>installateur</em>
+          Fidelia <em>installateur</em>
         </a>
         <nav>
           {nav.map(([href, label]) => (

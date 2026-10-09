@@ -1,17 +1,17 @@
-// The only way this app talks to the Hossouko API.
+// The only way this app talks to the Fidelia API.
 //
 // Sign-in is the same phone + SMS code as the apps, with app "admin": a
 // number holding the admin role gets an admin session, one holding the field
 // agent role an agent session (enrol shops, see their own), anyone else none
-// (hossouko-BE app/api/auth.py). `sessionRole()` says which.
+// (fidelia-BE app/api/auth.py). `sessionRole()` says which.
 // The access token lives in memory only. The refresh token lives in
 // sessionStorage, so a reload keeps the session but closing the tab ends it.
 // An admin session can approve shops and move accounts: it should not
 // outlive the tab on a shared office computer.
 
-export const API_BASE = (import.meta.env.VITE_HOSSOUKO_API_BASE || 'http://localhost:8000').replace(/\/+$/, '')
+export const API_BASE = (import.meta.env.VITE_FIDELIA_API_BASE || import.meta.env.VITE_HOSSOUKO_API_BASE || import.meta.env.VITE_DJASSA_API_BASE || 'http://localhost:8000').replace(/\/+$/, '')
 
-const REFRESH_KEY = 'hossouko-installer-refresh'
+const REFRESH_KEY = 'fidelia-installer-refresh'
 let accessToken = null
 let role = null
 let renewing = null

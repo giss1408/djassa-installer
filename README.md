@@ -1,7 +1,7 @@
-# Hossouko Admin
+# Fidelia Admin
 
-The SaaS admin screen for the Hossouko team. React + Vite, no UI framework,
-talking only to the Hossouko API (`../hossouko-BE/backend-api`).
+The SaaS admin screen for the Fidelia team. React + Vite, no UI framework,
+talking only to the Fidelia API (`../fidelia-BE/backend-api`).
 
 | Page | What it does | API |
 |---|---|---|
@@ -38,13 +38,13 @@ for you, and with `CORS_ORIGINS=http://localhost:5174`.
 
 | Variable | Meaning |
 |---|---|
-| `VITE_HOSSOUKO_API_BASE` | The API's base URL, e.g. `https://api.hossouko.ci`. Default `http://localhost:8000`. |
+| `VITE_FIDELIA_API_BASE` | The API's base URL, e.g. `https://api.fidelia.ci`. Default `http://localhost:8000`. |
 
 The API's `CORS_ORIGINS` must include this site's origin.
 
 ## Deploy
 
 [`render.yaml`](render.yaml) deploys it as a free Render static site. Set
-`VITE_HOSSOUKO_API_BASE`, add the site's URL to the API's `CORS_ORIGINS`, and
+`VITE_FIDELIA_API_BASE`, add the site's URL to the API's `CORS_ORIGINS`, and
 tighten the Content-Security-Policy to the API and media origins once known.
 The site is `noindex` and cannot be framed.

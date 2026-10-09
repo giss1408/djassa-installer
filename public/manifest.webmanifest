@@ -1,7 +1,7 @@
 {
-  "name": "Hossouko Installateur",
+  "name": "Fidelia Installateur",
   "short_name": "Installateur",
-  "description": "Inscrire et gérer les commerces Hossouko.",
+  "description": "Inscrire et gérer les commerces Fidelia.",
   "lang": "fr-CI",
   "start_url": "/",
   "scope": "/",

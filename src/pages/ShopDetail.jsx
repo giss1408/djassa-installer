@@ -69,7 +69,7 @@ function Detail({ shop, reload }) {
       <form className="card" onSubmit={submit}>
         <h2>Informations</h2>
         <ShopFields value={form} onChange={setForm} />
-        <Field label={shop.merchant_phone ? 'Changer le numéro du commerçant' : 'Lier un commerçant (numéro)'} hint="Ce numéro se connectera à Hossouko Pro pour ce commerce.">
+        <Field label={shop.merchant_phone ? 'Changer le numéro du commerçant' : 'Lier un commerçant (numéro)'} hint="Ce numéro se connectera à Fidelia Pro pour ce commerce.">
           <input value={merchant} onChange={(e) => setMerchant(e.target.value)} inputMode="tel" />
         </Field>
         <button disabled={save.busy}>Enregistrer</button>
@@ -82,7 +82,7 @@ function Detail({ shop, reload }) {
         {shop.pay_code ? (
           <>
             <p>
-              Code <code>{shop.pay_code}</code> — contenu du QR : <code>hossouko://pay/{shop.pay_code}</code>
+              Code <code>{shop.pay_code}</code> — contenu du QR : <code>fidelia://pay/{shop.pay_code}</code>
             </p>
             <p className="muted">Portefeuille : {WALLETS[shop.payout_provider] || shop.payout_provider} {shop.payout_account}</p>
             <button className="danger" onClick={rotate} disabled={qr.busy}>

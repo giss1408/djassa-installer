@@ -1,20 +1,20 @@
-# Render Blueprint: hossouko-installer, the SaaS admin screen, as a free static site.
+# Render Blueprint: fidelia-installer, the SaaS admin screen, as a free static site.
 #
 # The API must list this site's URL in its CORS_ORIGINS, and the build must
-# know the API: set VITE_HOSSOUKO_API_BASE below. Sign-in is phone + SMS code
-# for numbers with the admin role (hossouko-BE app/api/auth.py).
+# know the API: set VITE_FIDELIA_API_BASE below. Sign-in is phone + SMS code
+# for numbers with the admin role (fidelia-BE app/api/auth.py).
 
 services:
   - type: web
     runtime: static
-    name: hossouko-installer
+    name: fidelia-installer
     buildCommand: npm ci && npm run lint && npm run build
     staticPublishPath: ./dist
     pullRequestPreviewsEnabled: false
     envVars:
       - key: NODE_VERSION
         value: "22.12.0"
-      - key: VITE_HOSSOUKO_API_BASE
+      - key: VITE_FIDELIA_API_BASE
         sync: false
     headers:
       - path: /assets/*

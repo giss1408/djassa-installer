@@ -1,6 +1,6 @@
 import { vi } from 'vitest'
 
-// A stand-in for the Hossouko API: routes keyed "METHOD /path" (query string
+// A stand-in for the Fidelia API: routes keyed "METHOD /path" (query string
 // ignored unless the key has one), each returning [status, body]. Every call
 // is recorded with its parsed JSON body, so a test can assert what was sent.
 export function fakeApi(routes) {
