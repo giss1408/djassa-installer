@@ -31,6 +31,7 @@ const STATUS_LABELS = {
   pending: 'En attente',
   approved: 'Approuvée',
   rejected: 'Refusée',
+  done: 'Traitée',
   ready: 'Prêt',
   processing: 'En traitement',
   failed: 'Échec',

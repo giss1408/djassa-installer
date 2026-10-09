@@ -23,10 +23,10 @@ export default function PartnerRequests() {
   )
 }
 
-export function Tabs({ value, onChange }) {
+export function Tabs({ value, onChange, values = ['pending', 'approved', 'rejected'] }) {
   return (
     <div className="tabs">
-      {['pending', 'approved', 'rejected'].map((s) => (
+      {values.map((s) => (
         <button key={s} className={value === s ? '' : 'ghost'} onClick={() => onChange(s)}>
           <Status value={s} />
         </button>

@@ -5,6 +5,7 @@ import Shops from './pages/Shops.jsx'
 import ShopDetail from './pages/ShopDetail.jsx'
 import PartnerRequests from './pages/PartnerRequests.jsx'
 import Recovery from './pages/Recovery.jsx'
+import Deletions from './pages/Deletions.jsx'
 import Users from './pages/Users.jsx'
 import AppErrors from './pages/AppErrors.jsx'
 import { AgentEnrol, AgentShops } from './pages/Agent.jsx'
@@ -14,6 +15,7 @@ const NAV = [
   ['#/shops', 'Commerces'],
   ['#/partners', 'Inscriptions'],
   ['#/recovery', 'Récupérations'],
+  ['#/deletions', 'Suppressions'],
   ['#/users', 'Utilisateurs'],
   ['#/errors', 'Erreurs des apps'],
 ]
@@ -44,6 +46,7 @@ function Page({ hash }) {
   if (shop) return <ShopDetail id={Number(shop[1])} />
   if (hash.startsWith('#/partners')) return <PartnerRequests />
   if (hash.startsWith('#/recovery')) return <Recovery />
+  if (hash.startsWith('#/deletions')) return <Deletions />
   if (hash.startsWith('#/users')) return <Users />
   if (hash.startsWith('#/errors')) return <AppErrors />
   return <Shops />
