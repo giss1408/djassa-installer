@@ -447,3 +447,13 @@ th {
     overflow-x: auto;
   }
 }
+
+/* Pilot scorecard: the headline counts above the table. */
+.totals {
+  list-style: none;
+  padding: 0;
+  margin: 0.75rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.5rem;
+}

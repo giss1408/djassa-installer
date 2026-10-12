@@ -8,11 +8,13 @@ import Recovery from './pages/Recovery.jsx'
 import Deletions from './pages/Deletions.jsx'
 import Users from './pages/Users.jsx'
 import AppErrors from './pages/AppErrors.jsx'
+import PilotScorecard from './pages/Pilot.jsx'
 import { AgentEnrol, AgentShops } from './pages/Agent.jsx'
 
 // Hash routes: a static site needs no server rewrite rules for them.
 const NAV = [
   ['#/shops', 'Commerces'],
+  ['#/pilot', 'Pilote'],
   ['#/partners', 'Inscriptions'],
   ['#/recovery', 'Récupérations'],
   ['#/deletions', 'Suppressions'],
@@ -44,6 +46,7 @@ function AgentPage({ hash }) {
 function Page({ hash }) {
   const shop = hash.match(/^#\/shops\/(\d+)/)
   if (shop) return <ShopDetail id={Number(shop[1])} />
+  if (hash.startsWith('#/pilot')) return <PilotScorecard />
   if (hash.startsWith('#/partners')) return <PartnerRequests />
   if (hash.startsWith('#/recovery')) return <Recovery />
   if (hash.startsWith('#/deletions')) return <Deletions />

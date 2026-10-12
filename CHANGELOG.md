@@ -5,6 +5,15 @@ test site deploys `integration`. Entries are grouped by the day the work
 landed. It was **Djassa Installateur** until 6 October 2026, then **Hossouko
 Installateur**, and is **Fidelia Installateur** since 9 October.
 
+## 2026-10-12
+
+- **Pilote**: each shop page has a pilot card for the merchant's
+  pre-Fidelia baseline, their self-declared gender and their day-45 answer to
+  the paid-plan offer; it warns when the baseline was taken after the first
+  sale. A new *Pilote* page shows the scorecard: every pilot merchant's
+  recorded share, repeat visits against the baseline, new customers from
+  offers and commitment, with the counts next to every rate.
+
 ## 2026-10-09
 
 - **Suppressions**: account deletion requests from merchants, cashiers and

@@ -3,6 +3,7 @@ import { api, upload } from '../api.js'
 import { CATEGORIES, WALLETS, clean, formatBytes, useAction, useLoad } from '../lib.js'
 import { ErrorBox, Field, Loading, Status } from '../ui.jsx'
 import { ShopFields } from './Shops.jsx'
+import { PilotCard } from './Pilot.jsx'
 
 const EDITABLE = ['name', 'category', 'commune', 'address', 'phone', 'opening_hours', 'specialties', 'description', 'points_per_100', 'payout_provider', 'payout_account']
 
@@ -94,6 +95,8 @@ function Detail({ shop, reload }) {
         )}
         <ErrorBox error={qr.error} />
       </div>
+
+      {!shop.is_sample && <PilotCard shopId={shop.id} />}
     </>
   )
 }
