@@ -26,5 +26,5 @@ export const pair = (role) => ({ access_token: `access-${role}`, refresh_token: 
 export async function signInAs(role, routes = {}) {
   fakeApi({ 'POST /api/auth/login': () => [200, pair(role)], ...routes })
   const { signIn } = await import('../src/api.js')
-  await signIn('0700000009', 'password-1')
+  await signIn('0700000009', `p${Math.random().toString(36).slice(2)}`)
 }

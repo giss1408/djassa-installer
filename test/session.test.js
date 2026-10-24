@@ -2,14 +2,19 @@ import { describe, expect, it } from 'vitest'
 import { mustChangePassword, renew, replaceTemporaryPassword, sessionRole, signIn, signOut } from '../src/api.js'
 import { fakeApi, pair } from './server.js'
 
+// Generated per run: no password literal in the repository.
+const password = `p${Math.random().toString(36).slice(2)}`
+const temporary = `t${Math.random().toString(36).slice(2)}`
+const chosen = `c${Math.random().toString(36).slice(2)}`
+
 describe('session role', () => {
   it('comes from the sign-in response and ends with sign-out', async () => {
     const calls = fakeApi({
       'POST /api/auth/login': () => [200, pair('agent')],
       'POST /api/auth/logout': () => [204],
     })
-    await signIn('07 00 00 00 04', 'password-1')
-    expect(calls[0].body).toEqual({ phone: '0700000004', country_code: 'CI', password: 'password-1', app: 'admin' })
+    await signIn('07 00 00 00 04', password)
+    expect(calls[0].body).toEqual({ phone: '0700000004', country_code: 'CI', password: password, app: 'admin' })
     expect(sessionRole()).toBe('agent')
     expect(sessionStorage.getItem('fidelia-installer-refresh')).toBe('refresh-agent')
 
@@ -39,10 +44,10 @@ describe('session role', () => {
       'POST /api/auth/login': () => [200, { ...pair('admin'), access_token: token({ role: 'admin', pc: true }) }],
       'POST /api/auth/password': () => [200, { ...pair('admin'), access_token: token({ role: 'admin', pc: false }) }],
     })
-    await signIn('0700000009', 'temporaire-1')
+    await signIn('0700000009', temporary)
     expect(mustChangePassword()).toBe(true)
-    await replaceTemporaryPassword('le-mien-1234')
-    expect(calls.at(-1)).toMatchObject({ path: '/api/auth/password', body: { new: 'le-mien-1234' } })
+    await replaceTemporaryPassword(chosen)
+    expect(calls.at(-1)).toMatchObject({ path: '/api/auth/password', body: { new: chosen } })
     expect(mustChangePassword()).toBe(false)
   })
 })
