@@ -14,7 +14,7 @@ export default function Recovery() {
         <Tabs value={status} onChange={setStatus} />
       </div>
       <p className="muted">
-        Quelqu’un a perdu son numéro et demande son compte sur un nouveau. Le nouveau numéro est vérifié par SMS ; l’ancien a reçu un SMS d’alerte.
+        Quelqu’un a perdu son numéro et demande son compte sur un nouveau. Le nouveau numéro a été vérifié par l’équipe sur WhatsApp.
         Appelez le nouveau numéro et posez des questions sur le compte ci-dessous avant d’approuver : tout le compte (points, commerce) part sur le
         nouveau numéro.
       </p>

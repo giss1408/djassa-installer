@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { onSessionChange, renew, sessionRole, signOut } from './api.js'
-import SignIn from './pages/SignIn.jsx'
+import { mustChangePassword, onSessionChange, renew, sessionRole, signOut } from './api.js'
+import SignIn, { ChoosePassword } from './pages/SignIn.jsx'
 import Shops from './pages/Shops.jsx'
 import ShopDetail from './pages/ShopDetail.jsx'
 import PartnerRequests from './pages/PartnerRequests.jsx'
@@ -8,6 +8,7 @@ import Recovery from './pages/Recovery.jsx'
 import Deletions from './pages/Deletions.jsx'
 import Users from './pages/Users.jsx'
 import AppErrors from './pages/AppErrors.jsx'
+import Usage from './pages/Usage.jsx'
 import PilotScorecard from './pages/Pilot.jsx'
 import { AgentEnrol, AgentShops } from './pages/Agent.jsx'
 
@@ -15,6 +16,7 @@ import { AgentEnrol, AgentShops } from './pages/Agent.jsx'
 const NAV = [
   ['#/shops', 'Commerces'],
   ['#/pilot', 'Pilote'],
+  ['#/usage', 'Utilisation'],
   ['#/partners', 'Inscriptions'],
   ['#/recovery', 'Récupérations'],
   ['#/deletions', 'Suppressions'],
@@ -47,6 +49,7 @@ function Page({ hash }) {
   const shop = hash.match(/^#\/shops\/(\d+)/)
   if (shop) return <ShopDetail id={Number(shop[1])} />
   if (hash.startsWith('#/pilot')) return <PilotScorecard />
+  if (hash.startsWith('#/usage')) return <Usage />
   if (hash.startsWith('#/partners')) return <PartnerRequests />
   if (hash.startsWith('#/recovery')) return <Recovery />
   if (hash.startsWith('#/deletions')) return <Deletions />
@@ -57,10 +60,16 @@ function Page({ hash }) {
 
 export default function App() {
   const [session, setSession] = useState('checking')
+  // A new token pair can change the screen without changing `session` (the
+  // temporary password replaced), so every change re-renders.
+  const [, setRenewals] = useState(0)
   const hash = useHash()
 
   useEffect(() => {
-    const off = onSessionChange((signedIn) => setSession(signedIn ? 'in' : 'out'))
+    const off = onSessionChange((signedIn) => {
+      setSession(signedIn ? 'in' : 'out')
+      setRenewals((n) => n + 1)
+    })
     renew()
       .then((ok) => setSession(ok ? 'in' : 'out'))
       .catch(() => setSession('out'))
@@ -69,6 +78,7 @@ export default function App() {
 
   if (session === 'checking') return <p className="center muted">Chargement…</p>
   if (session === 'out') return <SignIn />
+  if (mustChangePassword()) return <ChoosePassword />
 
   const agent = sessionRole() === 'agent'
   const nav = agent ? AGENT_NAV : NAV

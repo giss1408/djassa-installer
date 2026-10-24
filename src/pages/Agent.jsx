@@ -28,7 +28,7 @@ export function AgentEnrol() {
         <div className="card">
           <h2>{created.name} est inscrit</h2>
           <p>
-            Le gérant ({created.merchant_phone_masked}) a reçu un SMS. Il peut se connecter à Fidelia Pro avec son numéro, devant vous.
+            Le mot de passe temporaire du gérant ({created.merchant_phone_masked}) attend dans Fidelia Admin, « Identifiants commerçant ». Dès qu’un admin le lui envoie sur WhatsApp, il se connecte à Fidelia Pro et choisit le sien.
           </p>
           <p className="muted">
             {created.pay_code

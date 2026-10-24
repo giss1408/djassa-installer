@@ -19,12 +19,12 @@ export function fakeApi(routes) {
   return calls
 }
 
-// A token pair as /api/auth/verify and /api/auth/refresh return it.
+// A token pair as /api/auth/login and /api/auth/refresh return it.
 export const pair = (role) => ({ access_token: `access-${role}`, refresh_token: `refresh-${role}`, token_type: 'bearer', role })
 
 // Signs in through the real api.js code path, with the session role given.
 export async function signInAs(role, routes = {}) {
-  fakeApi({ 'POST /api/auth/otp/verify': () => [200, pair(role)], ...routes })
-  const { verifyCode } = await import('../src/api.js')
-  await verifyCode('0700000009', '000000')
+  fakeApi({ 'POST /api/auth/login': () => [200, pair(role)], ...routes })
+  const { signIn } = await import('../src/api.js')
+  await signIn('0700000009', 'password-1')
 }

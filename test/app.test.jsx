@@ -31,6 +31,6 @@ describe('App', () => {
   it('asks a signed-out visitor to sign in', async () => {
     fakeApi({})
     render(<App />)
-    expect(await screen.findByText('Recevoir le code')).toBeTruthy()
+    expect(await screen.findByText('Se connecter')).toBeTruthy()
   })
 })

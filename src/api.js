@@ -1,9 +1,11 @@
 // The only way this app talks to the Fidelia API.
 //
-// Sign-in is the same phone + SMS code as the apps, with app "admin": a
-// number holding the admin role gets an admin session, one holding the field
-// agent role an agent session (enrol shops, see their own), anyone else none
-// (fidelia-BE app/api/auth.py). `sessionRole()` says which.
+// Sign-in is phone + password, with app "admin": a number holding the admin
+// role gets an admin session, one holding the field agent role an agent
+// session (enrol shops, see their own), anyone else none (fidelia-BE
+// app/api/password_auth.py). `sessionRole()` says which. A session opened with
+// a temporary password the team sent must choose a new one first
+// (`mustChangePassword()`).
 // The access token lives in memory only. The refresh token lives in
 // sessionStorage, so a reload keeps the session but closing the tab ends it.
 // An admin session can approve shops and move accounts: it should not
@@ -14,6 +16,7 @@ export const API_BASE = (import.meta.env.VITE_FIDELIA_API_BASE || import.meta.en
 const REFRESH_KEY = 'fidelia-installer-refresh'
 let accessToken = null
 let role = null
+let mustChange = false
 let renewing = null
 const listeners = new Set()
 
@@ -35,6 +38,7 @@ function readRefresh() {
 function storePair(pair) {
   accessToken = pair.access_token
   role = pair.role
+  mustChange = claims(pair.access_token).pc === true
   try {
     sessionStorage.setItem(REFRESH_KEY, pair.refresh_token)
   } catch {
@@ -46,6 +50,7 @@ function storePair(pair) {
 function clearSession() {
   accessToken = null
   role = null
+  mustChange = false
   try {
     sessionStorage.removeItem(REFRESH_KEY)
   } catch {
@@ -54,8 +59,19 @@ function clearSession() {
   listeners.forEach((fn) => fn(false))
 }
 
+// The token's claims, unverified: they only decide what the screens offer.
+function claims(token) {
+  try {
+    return JSON.parse(atob(token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')))
+  } catch {
+    return {}
+  }
+}
+
 // "admin" or "agent". Decides what the screens offer; the server enforces it.
 export const sessionRole = () => role
+
+export const mustChangePassword = () => mustChange
 
 export function onSessionChange(fn) {
   listeners.add(fn)
@@ -147,11 +163,19 @@ async function publicPost(path, body) {
   return decode(response)
 }
 
-export const requestCode = (phone) => publicPost('/api/auth/otp/request', { phone, app: 'admin' })
-
-export async function verifyCode(phone, code) {
-  storePair(await publicPost('/api/auth/otp/verify', { phone, code, app: 'admin' }))
+export async function signIn(phone, password) {
+  storePair(await publicPost('/api/auth/login', { phone: phone.replace(/\s+/g, ''), country_code: 'CI', password, app: 'admin' }))
 }
+
+// Replaces the temporary password the session was opened with: the server
+// asks for no current password then. (A normal change, with the current one,
+// is done in Fidelia Admin: a wrong guess here would end the session.)
+export async function replaceTemporaryPassword(newPassword) {
+  storePair(await api('/api/auth/password', { method: 'POST', body: { new: newPassword } }))
+}
+
+// A forgotten password: the team sends a temporary one on WhatsApp.
+export const requestPassword = (phone) => publicPost('/api/auth/password-reset', { phone: phone.replace(/\s+/g, ''), country_code: 'CI' })
 
 export async function signOut() {
   const refresh = readRefresh()
